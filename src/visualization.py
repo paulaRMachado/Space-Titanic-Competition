@@ -1,4 +1,3 @@
-import seaborn as sbn
 import plotly.express as px
 import pandas as pd
 import plotly.graph_objects as go
@@ -70,3 +69,16 @@ def viz3(df):
     # Show the plot
     viz.show()
     return viz
+
+def viz4(df):
+    column_sums = df[['RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']].sum()
+
+    # Create a bar chart
+    bar_chart = px.bar(
+        x=column_sums.index,  # Use column names as x-axis labels
+        y=column_sums.values,  # Use column sums as y-axis values
+        title="Total Expenses by Amenity",
+        labels={'x': 'Amenity', 'y': 'Total Expense'}
+    )
+    bar_chart.show()
+    return bar_chart

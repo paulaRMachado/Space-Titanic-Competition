@@ -7,9 +7,11 @@ def deck_sort(df):
 
 def data_viz(df):
     """
-    This function prepares the data very briefly for entering the model.
+    This function prepares the data very briefly for understanding and prepared some viasualizations.
     - cast columns CryoSleep and VIP as boolean values.
-    - create dict to 
+    - create dict to fill missing values.
+    - dropping unnecessary columns (Cabin, name and number).
+    - 
     """
     df[['Deck', 'Num', 'Side']] = df['Cabin'].str.split('/', expand=True)
     df[['Group', 'Number']] = df['PassengerId'].str.split('_', expand=True)
@@ -33,11 +35,12 @@ def data_viz(df):
 
 def train_transform(df):
     """
-    This function prepares the data for the model and fill some missing information according to the EDA's fidings
+    This function prepares the data for the model and fill some missing information according to the EDA's findings
     """
-    # According to the findings, proprer assign people to Decks
+    # According to the findings, proper assign people to Decks
     df.loc[df['Deck'].isin(['A', 'B', 'C', 'T']), 'HomePlanet'] = 'Europa'
     df.loc[df['Deck'].isin(['G']), 'HomePlanet'] = 'Earth'
+
     # Crating a dictionary for the remaing data
     destination_dict = {"TRAPPIST-1e":1, "PSO J318.5-22":2,"55 Cancri e":3, "Undisclosed":4}
     df["Destination"].replace(destination_dict, inplace = True)
@@ -51,7 +54,7 @@ def train_transform(df):
     side_dict = {"P":1, "S":2, "Undisclosed":3}
     df["Side"].replace(side_dict, inplace = True)
 
-    #Standardizing largescales
+    #Standardizing large scales
     min_max_scaler = MinMaxScaler()
     df["Expenses_modified"] = min_max_scaler.fit_transform(df["TotalExpenses"].values.reshape(-1, 1))
     
