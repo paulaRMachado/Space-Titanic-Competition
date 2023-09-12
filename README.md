@@ -5,7 +5,7 @@
 ###### Addison Howard, Ashley Chow, Ryan Holbrook. (2022). Spaceship Titanic. Kaggle. https://kaggle.com/competitions/spaceship-titanic
 
 ## Introduction
-This is a study of my first solo attempt on creating a model. :mechanical_arm: joining the Kaggle competition Spaceship Titanic.
+This is a study of my first solo attempt on creating a model by joining the Kaggle competition Spaceship Titanic. :mechanical_arm:
 
 First I'll go for a simple EDA, then I'll figure out how I can fill some of the missing data and then I prep my data for the model.
 
@@ -37,7 +37,9 @@ Passengers may come from 3 different locations: Planet Earth, Planet Mars and Mo
 And passengers may go to 3 different locations: TRAPPIST-1e, PSO J318.5-22 and 55 Cancri e. Here is how they are distributed through the decks:
 ![](images/count_deck_destiny)
 
-### Deeper EDA
+You can follow all visualizations in the JupyterNotebook
+![EDA-Titanic.ipynb]
+
 ### Filling NaNs...
 There are about 200 missing values in each column (except for Passenger ID and Transported) that need to be treated
 Working on it... :construction_worker_woman:
@@ -54,5 +56,6 @@ For this challenge I used:
 - Pandas
 - Plotly
 - Scikit-learn
+- Tensorflow
 
 So far...

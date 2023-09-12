@@ -11,7 +11,7 @@ def viz1(df):
     )
     # Show the plot
     viz.show()
-    return viz
+ 
 
 def viz2(df):
     viz = px.histogram(df, x='Age', title="Passenger's Age Distribution - Histogram")
@@ -20,7 +20,7 @@ def viz2(df):
 
     # Show the plot
     viz.show()
-    return viz
+
 
 def viz3(df):
     
@@ -68,7 +68,7 @@ def viz3(df):
 
     # Show the plot
     viz.show()
-    return viz
+  
 
 def viz4(df):
     column_sums = df[['RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']].sum()
@@ -81,4 +81,77 @@ def viz4(df):
         labels={'x': 'Amenity', 'y': 'Total Expense'}
     )
     bar_chart.show()
-    return bar_chart
+
+# Deck Explorations
+
+def viz5(df):
+    custom_colors = ['#8C4843','#9CAFB7', '#ED9B40', '#64B6AC']
+    count_decksHome = px.histogram(df, x='Deck', title='Count Plot per Deck and Home Planet', color='HomePlanet', color_discrete_sequence=custom_colors)
+    count_decksHome.update_xaxes(title='Deck')
+    count_decksHome.update_yaxes(title='Count')
+
+    # Show the plot
+    count_decksHome.show()
+
+def viz6(df):
+    custom_colors = ['#8C4843', '#ED9B40','#9CAFB7', '#64B6AC']
+    count_decksDestination = px.histogram(df, x='Deck', title='Count Plot per Deck and Destination', color='Destination',color_discrete_sequence=custom_colors)
+    count_decksDestination.update_xaxes(title='Deck')
+    count_decksDestination.update_yaxes(title='Count')
+
+    # Show the plot
+    count_decksDestination.show()
+
+
+def viz8(df):
+    # Create box charts for passenger counts by deck and destination
+    box_expensesD = px.box(df, x='Deck', y='TotalExpenses', color='Deck', facet_col='HomePlanet', facet_col_wrap=1,
+                title="Passenger's <b>Total Expenses</b> Distribution by Deck")
+    box_expensesD.update_layout(
+        width=1100,  # Set the width to your desired value
+        height=1100,  # Set the height to your desired value
+    )
+    # Show the plot
+    box_expensesD.show()
+
+
+def simple_boxplot(df, eixoy ,cor):
+    """
+    This function draws a boxplot using Plotly.
+    :: Args::
+    :df    - dataframe used for the information
+    :eixoy - name of the column used for the numerical data
+    :cor   - cathegorical data for comparisson
+    
+    ::Returns::
+    It shows the plot
+    """
+    legenda = 'Boxplot of ' + eixoy + ' in ' + cor
+    fig = px.box(df, y = eixoy, color = cor, title = legenda)
+
+    # Customize the appearance of the plot (optional)
+    fig.update_yaxes(title_text= eixoy)
+
+    # Show the interactive plot
+    fig.show()
+
+def xy_boxplot(df, eixoy, eixox,cor):
+    """
+    This function draws a boxplot using Plotly.
+    :: Args::
+    :df    - dataframe used for the information
+    :eixoy - name of the column used for the numerical data
+    :eixox - name of the column used for the second numerical data or column separation of cathegorical data
+    :cor   - cathegorical data for comparisson
+    
+    ::Returns::
+    It shows the plot
+    """
+    legenda = 'Boxplot of ' + eixoy + ' in ' + cor 
+    fig = px.box(df, y = eixoy, x= eixox, color = cor, title = legenda)
+
+    # Customize the appearance of the plot (optional)
+    fig.update_yaxes(title_text= eixoy)
+
+    # Show the interactive plot
+    fig.show()

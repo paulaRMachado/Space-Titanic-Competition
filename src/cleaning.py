@@ -1,10 +1,6 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
-def deck_sort(df):
-    df.loc[df['deck'].isin(['A', 'B', 'C']), 'home planet'] = 'Europa'
-    return df
-
 def data_viz(df):
     """
     This function prepares the data very briefly for understanding and prepared some viasualizations.
@@ -21,14 +17,11 @@ def data_viz(df):
     df["Destination"].fillna("Undisclosed", inplace=True) 
     df["HomePlanet"].fillna("Undisclosed", inplace=True)
     df["Deck"].fillna("Undisclosed", inplace=True) 
-    df["Side"].fillna("Undisclosed", inplace=True) 
+    df["Side"].fillna("Undisclosed", inplace=True)
+    df["Age"].fillna("Undisclosed", inplace=True) 
 
     df.drop(columns=["Cabin", "Name","Number"], inplace=True)
-
-    df['CryoSleep'] = df['CryoSleep'].astype(bool)
-    df['VIP'] = df['VIP'].astype(bool)
-
-    df.sort_values(by='HomePlanet', inplace=True)
+   
     df.sort_values(by='Deck', inplace=True)
     
     return df
@@ -40,6 +33,8 @@ def train_transform(df):
     # According to the findings, proper assign people to Decks
     df.loc[df['Deck'].isin(['A', 'B', 'C', 'T']), 'HomePlanet'] = 'Europa'
     df.loc[df['Deck'].isin(['G']), 'HomePlanet'] = 'Earth'
+    # According to the findings, set expenses correctly
+    df.loc[df['CryoSleep'] == True, ['TotalExpenses']] = 0 # if want to set more columns to 0
 
     # Crating a dictionary for the remaing data
     destination_dict = {"TRAPPIST-1e":1, "PSO J318.5-22":2,"55 Cancri e":3, "Undisclosed":4}
